@@ -2,6 +2,10 @@
 # context) and forwards everything to the realm service, including WebSocket
 # upgrades for /ws/*. With REALM_DOMAIN=localhost Caddy uses its internal CA.
 {$REALM_DOMAIN:localhost} {
+	# wenilla-realm fork: an IP-only LAN cannot get a public certificate, so use
+	# Caddy's internal CA (self-signed). The browser warns once; accept to continue.
+	# For a public domain, remove this line and let Caddy manage a real certificate.
+	tls internal
 	# Caddy's encode handler skips responses that already carry a
 	# Content-Encoding, so the precompressed .br/.gz wasm served by the realm
 	# service passes through untouched.

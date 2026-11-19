@@ -124,9 +124,9 @@ services:
     environment:
       REALM_DOMAIN: ${REALM_DOMAIN:-localhost}
     ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
+      # wenilla-realm fork: FnNAS/other hosts may already own 80/443 (e.g. the NAS web UI).
+      # Caddy listens on 8443 with `tls internal` (see caddy/Caddyfile) for an IP-only LAN trial.
+      - "8443:8443"
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
